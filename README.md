@@ -15,23 +15,53 @@ Acciones (Post-Mortem Constructivo):
 Fiel a la cultura SRE (Site Reliability Engineering), realicé un análisis retrospectivo libre de culpas (blameless post-mortem) enfocado en entender qué falló en mi proceso de desarrollo y cómo mejorarlo.
 
 Fase
+
 Contención Inmediata
+
 Acción Tomada
+
 Reinicié de emergencia el servicio de base de datos para liberar la memoria y restablecer el acceso a los usuarios afectados de forma inmediata.
+
 Fase
+
 Análisis de Causa Raíz
+
 Acción Tomada
+
 Identifiqué que la consulta (query) SQL que diseñé para el reporte no tenía límite de paginación y faltaba un índice de búsqueda clave en la columna de fechas.
+
 Fase
+
 Solución Permanente
+
 Acción Tomada
+
 Agregué un índice a la tabla de transacciones y refactoricé mi código para implementar paginación (procesamiento de datos por pequeños lotes en vez de cargar todo a la vez).
 
 Aprendizajes:
 Validación en entornos realistas: Comprendí que no puedo asumir que si una función es rápida en mi entorno local de desarrollo (con pocos datos de prueba), lo será en producción. Es imperativo utilizar bases de datos con volúmenes masivos simulados para estas pruebas.
 Autoevaluación y Revisiones: Ningún código de impacto estructural debe ser subido sin revisión. Actualicé mi propio flujo de trabajo para incluir un checklist personal antes de cada Pull Request, evaluando rigurosamente el impacto en el rendimiento.
 
+Evidencia de Flujo de Trabajo y Control de Versiones
+Gestioné este trabajo siguiendo el modelo de control de versiones con ramas separadas y redacté mensajes de commit descriptivos para asegurar la trazabilidad de mis cambios.
+Captura de pantalla de los Commits / Pull Request en GitHub:
+
+<img width="2555" height="1386" alt="Captura de pantalla 2026-07-26 172127" src="https://github.com/user-attachments/assets/8043b240-d3be-4f9c-ad21-a253294f03e9" />
+
+Ejemplo de los commits que realicé en mi repositorio:
+commit 7f656b3
+feat: implemento paginacion por lotes para la generacion de reportes
+
+commit 42ef8bf
+fix: agrego indice en columna fecha para optimizar tiempo de respuesta
+
+commit 8afd3f8
+docs: publico entrada de blog con post-mortem constructivo del
+
+
 Reflexión sobre Feedback Radicalmente Sincero
 Durante la resolución de este incidente, recibí una sesión de feedback radicalmente sincero por parte de mi líder técnico que marcó un punto de inflexión en mi manera de enfocar el desarrollo. Aplicando el modelo de Kim Scott, su retroalimentación fue directa, constructiva y empática.
 Me comunicó lo siguiente: "Entiendo perfectamente que querías entregar la funcionalidad del reporte antes del cierre de mes y valoro enormemente tu esfuerzo individual para cumplir con los tiempos (Care Personally). Sin embargo, el haber omitido las pruebas de estrés en la base de datos y acelerar tu proceso de revisión de código provocó la caída del sistema, afectando a los usuarios en producción (Challenge Directly)."
 Al principio fue un impacto escucharlo, pero al separar el problema de mi persona, entendí que el objetivo no era juzgarme, sino salvaguardar la calidad técnica y enseñarme a prever riesgos. Esto me ayudó a adoptar una mentalidad de crecimiento genuina: comprendí que mi "agilidad" para entregar tareas no debe significar saltarme las medidas de seguridad. Gracias a esa conversación sincera, hoy soy mucho más riguroso con mis pruebas de carga. Entendí que el feedback claro, brindado sin ambigüedades pero con respeto humano, es la herramienta más poderosa para potenciar mi aprendizaje y construir confianza profesional.
+
+URL pública del blog (GitHub Pages): https://malczewski94.github.io/Entregable-Final-Mentalidad-de-Crecimiento-y-Comunicaci-n-en-Entornos-Digitales/
