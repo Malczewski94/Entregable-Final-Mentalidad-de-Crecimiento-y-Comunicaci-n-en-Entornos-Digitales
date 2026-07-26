@@ -27,3 +27,6 @@ Solución Permanente
 Acción Tomada
 Agregué un índice a la tabla de transacciones y refactoricé mi código para implementar paginación (procesamiento de datos por pequeños lotes en vez de cargar todo a la vez).
 
+Aprendizajes:
+Validación en entornos realistas: Comprendí que no puedo asumir que si una función es rápida en mi entorno local de desarrollo (con pocos datos de prueba), lo será en producción. Es imperativo utilizar bases de datos con volúmenes masivos simulados para estas pruebas.
+Autoevaluación y Revisiones: Ningún código de impacto estructural debe ser subido sin revisión. Actualicé mi propio flujo de trabajo para incluir un checklist personal antes de cada Pull Request, evaluando rigurosamente el impacto en el rendimiento.
